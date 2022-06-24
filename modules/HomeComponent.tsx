@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react'
-import { ActivityIndicator, StyleSheet, View } from 'react-native'
-import { Text } from 'react-native-paper';
+import { ActivityIndicator, ImageBackground, StyleSheet, View } from 'react-native'
+import { Avatar, Text } from 'react-native-paper';
 import CloudComponent from './CloudComponet';
 import SearchComponent from './SearchComponent';
 import ShowWeather from './ShowWeather';
@@ -31,7 +31,18 @@ const HomeComponent = () => {
   }
   return (
     <View>
-       <SearchComponent onSearch ={onSearch} setName={setName} />
+        {
+            !data ?  <View>
+            <SearchComponent  onSearch ={onSearch} setName={setName} />
+            <ImageBackground style={styles.image} source={require('../assets/bg.jpeg')}>
+               
+               <Avatar.Image  style={styles.logo} size={100} source={require('../assets/Logo2.jpeg')} />
+               <Text style={{color : 'white',fontSize : 20}}>Weather app</Text>
+            </ImageBackground>
+            </View> : <SearchComponent  onSearch ={onSearch} setName={setName} />
+
+        }
+        
        {
            loading ?  <ActivityIndicator size="large" color="#00ff00" />
            :<View>
@@ -66,6 +77,15 @@ const styles = StyleSheet.create({
         display : 'flex',
         margin : 10,
         height : 100
-    }
+    },
+    image : {
+        height : 600,
+        alignItems : 'center'
+     },
+     search : {
+     },
+     logo : {
+         marginTop : 100
+     }
 })
 export default HomeComponent
